@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -62,16 +65,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="App-Data\CauHoi.txt" />
     <Content Include="App-Data\DeThi.txt" />
+    <Content Include="App-Data\KetQuaThi.txt" />
     <Content Include="App-Data\TaiKhoan.txt" />
     <Content Include="css\DangKy.css" />
     <Content Include="css\DangNhap.css" />
     <Content Include="css\DanhSachDeThi.css" />
+    <Content Include="css\KetQuaThi.css" />
+    <Content Include="css\LamBaiThi.css" />
+    <Content Include="css\LichSuThi.css" />
     <Content Include="css\Site.css" />
     <Content Include="css\TaiKhoan.css" />
     <Content Include="css\TrangChu.css" />
@@ -82,6 +85,12 @@
     <Content Include="JS\DangNhap.js" />
     <Content Include="JS\DanhSachDeThi.js" />
     <Content Include="JS\TaiKhoan.js" />
+    <Content Include="KetQuaThi.aspx" />
+    <Content Include="LamBaiThi.aspx" />
+    <Content Include="LichSuThi.aspx" />
+    <Content Include="QuanLyCauHoi.aspx" />
+    <Content Include="QuanLyDeThi.aspx" />
+    <Content Include="QuanLyTaiKhoan.aspx" />
     <Content Include="TaiKhoan.aspx" />
     <Content Include="TrangChu.aspx" />
     <Content Include="Web.config" />
@@ -108,7 +117,50 @@
     <Compile Include="DanhSachDeThi.aspx.designer.cs">
       <DependentUpon>DanhSachDeThi.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DuLieuThi.cs" />
+    <Compile Include="KetQuaThi.aspx.cs">
+      <DependentUpon>KetQuaThi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="KetQuaThi.aspx.designer.cs">
+      <DependentUpon>KetQuaThi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LamBaiThi.aspx.cs">
+      <DependentUpon>LamBaiThi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LamBaiThi.aspx.designer.cs">
+      <DependentUpon>LamBaiThi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LichSuThi.aspx.cs">
+      <DependentUpon>LichSuThi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LichSuThi.aspx.designer.cs">
+      <DependentUpon>LichSuThi.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyCauHoi.aspx.cs">
+      <DependentUpon>QuanLyCauHoi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuanLyCauHoi.aspx.designer.cs">
+      <DependentUpon>QuanLyCauHoi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyDeThi.aspx.cs">
+      <DependentUpon>QuanLyDeThi.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuanLyDeThi.aspx.designer.cs">
+      <DependentUpon>QuanLyDeThi.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan.aspx.cs">
+      <DependentUpon>QuanLyTaiKhoan.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="QuanLyTaiKhoan.aspx.designer.cs">
+      <DependentUpon>QuanLyTaiKhoan.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -133,8 +185,8 @@
     <Compile Include="XuLyTaiKhoan.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <Content Include="Site.Master" />
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -167,12 +219,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
@@ -180,4 +226,10 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
 </Project>
